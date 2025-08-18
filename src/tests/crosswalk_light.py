@@ -5,10 +5,11 @@ from ultralytics import YOLO
 import cv2
 import matplotlib.pyplot as plt
 
+
 model = YOLO("yolo11n.pt")
 
 img = '../../data/test09.jpg'
 
-results = model(img)
+# results = model(img)
 
-results[0].show()
+train_model = model.train(data="../../data/dataset/data.yaml", epochs = 5, imgsz = 640)
