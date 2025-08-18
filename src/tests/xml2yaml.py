@@ -28,4 +28,4 @@ def xml_to_yaml(xml_file, yaml_file):
         yaml.dump(data, f, allow_unicode=True, sort_keys=False)
 
 # 사용 예시
-xml_to_yaml("bbox_sample.xml", "bbox_sample.yaml")
+xml_to_yaml("P1025_07.xml", "P1025_07.yaml")

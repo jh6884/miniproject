@@ -3,3 +3,4 @@ pjvenv/*
 src/tests/*.pt
 src/tests/runs/*
 src/tests/*.yaml
+src/tests/*.xml

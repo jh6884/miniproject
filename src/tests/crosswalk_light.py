@@ -8,4 +8,4 @@ from inference_sdk import InferenceHTTPClient
 
 model = YOLO("yolo11n.pt")
 
-results = model.train(data="bbox_sample.yaml", epochs=10, imgsz=640)
+results = model.train(data="../../data/data_sample/bbox/bbox_sample.yaml", epochs=10, imgsz=640)
