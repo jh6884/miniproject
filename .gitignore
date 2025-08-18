@@ -1,3 +1,4 @@
 data/*
 pjvenv/*
 src/tests/*.pt
+src/tests/runs/*
