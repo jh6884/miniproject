@@ -1,0 +1,11 @@
+라이브러리: cv2, YOLO
+
+웹캠 호출
+cap = cv2.VideoCapture(0)
+
+모델 지정
+ -보행 신호 감지 모델과 보행자/차량 인식 모델을 별도로 사용
+tl_model = YOLO('tl_model')
+person_and_car = YOLO('yolo11n.pt)
+
+
