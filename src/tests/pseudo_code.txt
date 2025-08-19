@@ -8,4 +8,12 @@ cap = cv2.VideoCapture(0)
 tl_model = YOLO('tl_model')
 person_and_car = YOLO('yolo11n.pt)
 
-
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+    보행 신호를 인식하면 터미널에 print()로 상태 보여주기
+    tl_model(frame)으로 frame을 읽었을 때
+    if detection:
+        인식된 신호가 있다면
+        print('value') 값을 출력
