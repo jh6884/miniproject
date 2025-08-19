@@ -28,3 +28,8 @@
 1. 개발 환경
 2. 개발 과정
  * 08 / 18 : 
+    - 데이터 다운로드, 출처: ai hub https://www.aihub.or.kr/aihubdata/data/view.do?pageIndex=1&currMenu=115&topMenu=100&srchOptnCnd=OPTNCND001&searchKeyword=%EC%9D%B8%EB%8F%84%EB%B3%B4%ED%96%89&srchDetailCnd=DETAILCND001&srchOrder=ORDER001&srchPagePer=20&aihubDataSe=data&dataSetSn=189
+    - 사전 학습된 횡단보도 신호등 객체 인식 모델을 찾는 데 실패함
+ * 08 / 19 :
+    - 모델 학습을 위해 xml2yaml.py 코드로 각 이미지에 대치되는 annotation 정보가 담긴 txt파일 생성
+    - 모델 학습을 위해 data.yaml 파일 생성
