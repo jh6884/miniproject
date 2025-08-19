@@ -1,7 +1,7 @@
 import yaml, os
-
+dir_path = 'C:\\Users\\405\\projects\\miniproject\\data\\Bbox_27_new\\'
 yaml_path = 'P1025_07.yaml'
-
+lst = os.listdir()
 with open(yaml_path, 'r') as file:
     data = yaml.safe_load(file)
 

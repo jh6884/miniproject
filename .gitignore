@@ -4,3 +4,4 @@ src/tests/*.pt
 src/tests/runs/*
 src/tests/*.yaml
 src/tests/*.xml
+src/runs/*
