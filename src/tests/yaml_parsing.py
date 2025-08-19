@@ -26,6 +26,8 @@ for file in lst:
                         class_num = 1
                     elif lable == 'traffic_light':
                         class_num = 2
+                    else:
+                        class_num = 3
                     x_center = round((xtl+xbr)/(2*1920),6)
                     y_center = round((ytl+ybr)/(2*1080),6)
                     width = round((xbr-xtl)/1920,6)
@@ -47,6 +49,8 @@ for file in lst:
                     class_num = 1
                 elif lable == 'traffic_light':
                     class_num = 2
+                else:
+                    class_num = 3
                 x_center = round((xtl+xbr)/(2*1920),6)
                 y_center = round((ytl+ybr)/(2*1080),6)
                 width = round((xbr-xtl)/1920,6)
