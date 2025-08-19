@@ -2,6 +2,7 @@ data/*
 pjvenv/*
 src/tests/*.pt
 src/tests/runs/*
+src/tests/runs_old/*
 src/tests/*.yaml
 src/tests/*.xml
 src/runs/*
