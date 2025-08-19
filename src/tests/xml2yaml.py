@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-import yaml
+import yaml, os
 
 def xml_to_yaml(xml_file, yaml_file):
     tree = ET.parse(xml_file)
@@ -28,4 +28,12 @@ def xml_to_yaml(xml_file, yaml_file):
         yaml.dump(data, f, allow_unicode=True, sort_keys=False)
 
 # 사용 예시
-xml_to_yaml("P1025_07.xml", "P1025_07.yaml")
+xml_files = []
+start_dir = '../../data/dataset/xml/'
+
+lst = os.listdir(start_dir)
+
+for file in lst:
+    xml_file = os.path.join(start_dir+file)
+    yaml_file = os.path.join('../../data/dataset/yaml/'+file[0:-4]+'.yaml')
+    xml_to_yaml(xml_file, yaml_file)
