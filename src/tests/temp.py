@@ -7,7 +7,7 @@ model = YOLO('runs/detect/train/weights/best.pt')
 model2 = YOLO('yolo11s.pt')
 
 img_path = '../../data/images/'
-img_name = '06.jpg'
+img_name = '11.jpg'
 lst = os.listdir(img_path)
 img = cv2.imread(img_path+img_name)
 result = model(img_path+img_name, conf=0.1)
