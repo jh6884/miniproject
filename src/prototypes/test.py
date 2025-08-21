@@ -3,7 +3,7 @@ import os, cv2
 import matplotlib.pyplot as plt
 from inference_sdk import InferenceHTTPClient
 
-video_path = '../../data/images/video_sample.gif'
+video_path = '../../data/images/video_sample3.mp4'
 
 CLIENT = InferenceHTTPClient(
     api_url="https://serverless.roboflow.com",

@@ -10,11 +10,7 @@ setting var
 '''
 class Config:
     # file path config
-    video_path = '../../data/images/video_sample2.mp4'
-
-    # video config
-    frame_width = 640
-    frame_height = 480
+    video_path = '../../data/images/video_sample5.mp4'
 
     # model config
     model = YOLO('yolo11n.pt')
@@ -28,7 +24,7 @@ def draw_boundingbox(frame, model):
     if frame is None:
         print("There is no input Video.")
 
-    detect_object = model(frame, conf=0.3, verbose=False)
+    detect_object = model(frame, conf=0.1, verbose=False)
 
     annotated_frame = detect_object[0].plot()
 
@@ -52,6 +48,21 @@ def set_video_size(frame):
 def calc_distance(frame, model):
     detect_crosswalk = model(frame, classes=0)
     detect_cars = model(frame, classes=5)
+    crosswalk_box = []
+    cars_box = []
+    for coordinate in detect_crosswalk:
+        for box in coordinate.boxes:
+            x1, y1, x2, y2 = box.xyxy[0].tolist()
+            crosswalk_box.append([x1, y1, x2, y2])
+    for coordinate in detect_cars:
+        for box in coordinate.boxes:
+            x1, y1, x2, y2 = box.xyxy[0].tolist()
+            cars_box.append([x1, y1, x2, y2])
+    print(crosswalk_box)
+    print()
+    print(cars_box)
+    print()
+    
 
 #codes
 if __name__ == '__main__':
