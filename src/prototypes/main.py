@@ -67,6 +67,7 @@ if __name__ == '__main__':
         if not ret:
             break
         frame = set_video_size(frame)
+        calc_distance(frame, config.model)
         result_frame = draw_boundingbox(frame, config.model)
         cv2.imshow('video', result_frame)
         if cv2.waitKey(1) & 0xff == ord('q'):
