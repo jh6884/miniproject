@@ -16,64 +16,55 @@ class Config:
     frame_width = 640
     frame_height = 480
 
-    # class config
-    classes = {0: 'person',
-               1: 'bicycle',
-               2: 'car',
-               3: 'motorcycle',
-               5: 'bus',
-               7: 'truck'
-               }
+    # model config
+    model = YOLO('yolo11n.pt')
 
 #functions
 '''
 def
 '''
-def setting_models():
-    # Call roboflow API for crosswalk, pedestrian light detection
-    CLIENT = InferenceHTTPClient(
-        api_url="https://serverless.roboflow.com",
-        api_key="Ct4LGBM8nYfY0kBogGnU"
-    )
 
-    # Call YOLO model for person, car detection
-    model = YOLO('yolo11n.pt')
-    return CLIENT, model
-
-def model_settings(frame, CLIENT, model, classes):
+def draw_boundingbox(frame, model):
     if frame is None:
         print("There is no input Video.")
 
-    detect_object = model(frame, classes=1, conf=0.3, verbose=False)
-    detect_crosswalk = CLIENT.infer(frame, model_id="traffic-light-vzfpm/3")
-    
-    print(detect_object)
-    pred = detect_crosswalk['predictions']
-    print(pred)
-    return
+    detect_object = model(frame, conf=0.3, verbose=False)
+
+    annotated_frame = detect_object[0].plot()
+
+    return annotated_frame
 
 def setting_videos(video_path):
     try:
         cap = cv2.VideoCapture(video_path)
-        
         if not cap.isOpened():
             raise RuntimeError
         return cap
     except Exception as e:
         print(f"failed to load video: {e}")
         return None
-    
+
+def set_video_size(frame):
+    ratio = round(frame.shape[0] / frame.shape[1], 2)
+    frame = cv2.resize(frame, (640, int(640*ratio)))
+    return frame
+
+def calc_distance(frame, model):
+    detect_crosswalk = model(frame, classes=0)
+    detect_cars = model(frame, classes=5)
+
 #codes
 if __name__ == '__main__':
     config = Config()
-    CLIENT, model = setting_models()
-    cap = setting_videos(config.video_path, config.frame_width, config.frame_height)
+    
+    cap = setting_videos(config.video_path)
     while True:
         ret, frame = cap.read()
         if not ret:
             break
-        
-        cv2.imshow('video', frame)
+        frame = set_video_size(frame)
+        result_frame = draw_boundingbox(frame, config.model)
+        cv2.imshow('video', result_frame)
         if cv2.waitKey(1) & 0xff == ord('q'):
             break
     cap.release()
