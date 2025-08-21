@@ -1,9 +1,9 @@
 data/*
 pjvenv/*
-src/tests/*.pt
+src/*/*.pt
 src/tests/runs/*
 src/tests/runs_old/*
-src/tests/*.yaml
-src/tests/*.xml
+src/*/*.yaml
+src/*/*.xml
 src/runs/*
 src/tests/model_train.py
