@@ -3,13 +3,13 @@ import os, cv2
 import matplotlib.pyplot as plt
 from inference_sdk import InferenceHTTPClient
 
-video_path = '../../data/images/video_sample2.mp4'
+video_path = '../../data/images/video_sample.gif'
 
 CLIENT = InferenceHTTPClient(
     api_url="https://serverless.roboflow.com",
     api_key="Ct4LGBM8nYfY0kBogGnU"
 )
-model = YOLO('yolo11n.pt')
+model = YOLO('best.pt')
 
 cap = cv2.VideoCapture(video_path)
 
@@ -23,9 +23,8 @@ while True:
     if not ret:
         break
     
-    new_width = int(frame.shape[1] / 4)
-    new_height = int(frame.shape[0] / 4)
-    frame = cv2.resize(frame, (new_width, new_height))
+    ratio = round(frame.shape[0] / frame.shape[1], 2)
+    frame = cv2.resize(frame, (640, int(640*ratio)))
     # 현재 프레임에 대해 객체 탐지 실행
     # 'stream=True'를 사용하면 메모리 효율성이 높아집니다.
     results = model(frame, stream=True)
