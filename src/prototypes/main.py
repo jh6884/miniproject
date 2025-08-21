@@ -46,22 +46,17 @@ def set_video_size(frame):
     return frame
 
 def calc_distance(frame, model):
-    detect_crosswalk = model(frame, classes=0)
-    detect_cars = model(frame, classes=5)
-    crosswalk_box = []
-    cars_box = []
-    for coordinate in detect_crosswalk:
-        for box in coordinate.boxes:
-            x1, y1, x2, y2 = box.xyxy[0].tolist()
-            crosswalk_box.append([x1, y1, x2, y2])
-    for coordinate in detect_cars:
-        for box in coordinate.boxes:
-            x1, y1, x2, y2 = box.xyxy[0].tolist()
-            cars_box.append([x1, y1, x2, y2])
-    print(crosswalk_box)
-    print()
-    print(cars_box)
-    print()
+    target_class = [0, 5]
+    detect_crosswalk = model(frame, classes=target_class)
+    
+    for r in detect_crosswalk:
+        for box in r.boxes:
+            class_id = int(box.cls[0])
+
+            if class_id in target_class:
+                coords = box.xyxy[0].tolist()
+                print(f'클래스 ID: {class_id}, BBox: {coords}')
+                print(f'클래스 이름: {model.names[class_id]}')
     
 
 #codes
