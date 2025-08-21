@@ -10,12 +10,20 @@ setting var
 '''
 class Config:
     # file path config
-    video_path = '../../data/images/video_sample.gif'
+    video_path = '../../data/images/video_sample2.mp4'
 
     # video config
     frame_width = 640
     frame_height = 480
 
+    # class config
+    classes = {0: 'person',
+               1: 'bicycle',
+               2: 'car',
+               3: 'motorcycle',
+               5: 'bus',
+               7: 'truck'
+               }
 
 #functions
 '''
@@ -32,26 +40,23 @@ def setting_models():
     model = YOLO('yolo11n.pt')
     return CLIENT, model
 
-def draw_bounding_boxes(frame, CLIENT, model):
+def model_settings(frame, CLIENT, model, classes):
     if frame is None:
         print("There is no input Video.")
 
-    detect_object = model.predict(source=frame)
+    detect_object = model(frame, classes=1, conf=0.3, verbose=False)
     detect_crosswalk = CLIENT.infer(frame, model_id="traffic-light-vzfpm/3")
     
-    for boxes in detect_object:
-        boxes.boxes.xywh
-        boxes.boxes.conf
+    print(detect_object)
     pred = detect_crosswalk['predictions']
     print(pred)
     return
 
-def setting_videos(video_path, frame_width, frame_height):
+def setting_videos(video_path):
     try:
         cap = cv2.VideoCapture(video_path)
-        cap.set(cv2.CAP_PROP_FRAME_WIDTH, frame_width)
-        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, frame_height)
-        if not cap:
+        
+        if not cap.isOpened():
             raise RuntimeError
         return cap
     except Exception as e:
@@ -67,7 +72,12 @@ if __name__ == '__main__':
         ret, frame = cap.read()
         if not ret:
             break
-        draw_bounding_boxes(frame, CLIENT, model)
+        
+        cv2.imshow('video', frame)
+        if cv2.waitKey(1) & 0xff == ord('q'):
+            break
+    cap.release()
+    cv2.destroyAllWindows()
 
 '''
 if __name__ == '__main__':
