@@ -1,7 +1,5 @@
 from ultralytics import YOLO
 import os, cv2
-import matplotlib.pyplot as plt
-from inference_sdk import InferenceHTTPClient
 
 #configs
 '''
