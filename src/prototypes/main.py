@@ -26,6 +26,24 @@ def draw_boundingbox(frame, model):
 
     annotated_frame = detect_object[0].plot()
 
+    predictions = detect_object.pred[0]
+
+    class_names = model.names
+    person_class_index = class_names.index('person')
+    cars_class_index = class_names.index('car')
+    crosswalk_class_index = class_names.index('crosswalk')
+
+    person_detecion = predictions[:, 4] == person_class_index
+    car_detection = predictions[:, 5] == cars_class_index
+    crosswalk_detection = predictions[:, 0] == crosswalk_class_index
+
+    if len(person_detecion) > 0:
+        for det in person_detecion:
+            bbox = det[:4].tolist()
+            cls = int(det[5].item())
+
+            print(bbox, cls)
+
     return annotated_frame
 
 def setting_videos(video_path):
@@ -43,10 +61,11 @@ def set_video_size(frame):
     frame = cv2.resize(frame, (640, int(640*ratio)))
     return frame
 
+'''
 def calc_distance(frame, model):
     target_class = [0, 5]
     detect_crosswalk = model(frame, classes=target_class)
-    
+ 
     for r in detect_crosswalk:
         for box in r.boxes:
             class_id = int(box.cls[0])
@@ -55,7 +74,7 @@ def calc_distance(frame, model):
                 coords = box.xyxy[0].tolist()
                 print(f'클래스 ID: {class_id}, BBox: {coords}')
                 print(f'클래스 이름: {model.names[class_id]}')
-    
+    '''
 
 #codes
 if __name__ == '__main__':
