@@ -26,7 +26,7 @@ def draw_boundingbox(frame, model):
 
     annotated_frame = detect_object[0].plot()
 
-    predictions = detect_object.pred[0]
+    predictions = detect_object.pred
 
     class_names = model.names
     person_class_index = class_names.index('person')
@@ -86,7 +86,7 @@ if __name__ == '__main__':
         if not ret:
             break
         frame = set_video_size(frame)
-        calc_distance(frame, config.model)
+#        calc_distance(frame, config.model)
         result_frame = draw_boundingbox(frame, config.model)
         cv2.imshow('video', result_frame)
         if cv2.waitKey(1) & 0xff == ord('q'):
